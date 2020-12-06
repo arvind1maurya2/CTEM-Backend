@@ -32,7 +32,7 @@ import com.ctem.service.UserDetailService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/auth")
+@RequestMapping("/api/basic")
 public class AuthController extends StatusMessage {
 
 	@Autowired

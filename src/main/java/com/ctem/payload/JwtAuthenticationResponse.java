@@ -10,7 +10,7 @@ import com.ctem.entity.User;
 public class JwtAuthenticationResponse {
 
 	private String accessToken;
-	private String tokenType = "Bearer";
+	private String tokenType = "Basic";
 	private User user;
 
 	/**
