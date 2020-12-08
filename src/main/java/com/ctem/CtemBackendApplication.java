@@ -46,9 +46,8 @@ public class CtemBackendApplication extends SpringBootServletInitializer  {
 	                registry.addMapping("/**")
 	                        .allowedMethods("*")
 	                       // .allowedOrigins("http://18.236.81.121");
-	                        .allowedOrigins("http://localhost:4200","http://18.236.81.121");
+	                        .allowedOrigins("http://localhost:3000","http://3.6.207.6:8081","http://localhost:8080","http://192.168.0.6:8080","http://3.6.207.6:3000");
 	            }
 	        };
 	    }
-	
 }

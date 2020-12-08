@@ -3,7 +3,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.ctem.entity.User;
+import com.ctem.entity.UserEntity;
 import com.ctem.payload.ApiResponse;
 import com.ctem.payload.LoginRequest;
 
@@ -13,21 +13,21 @@ public interface UserDetailService {
 
 	//public ApiResponse changePassword(ChangePasswordModal changePasswordModal);
 	
-	public User findByUsernameOrEmail(String usernameOrEmail);
+	public UserEntity findByUsernameOrEmail(String usernameOrEmail);
 
-	public ApiResponse createUser(User user);
+	public ApiResponse createUser(UserEntity user);
 
-	public List<User> getAllUsers();
+	public List<UserEntity> getAllUsers();
 
-	public User getUserById(Long userId);
+	public UserEntity getUserById(Long userId);
 
-	public ApiResponse updateUser(User user);
+	public ApiResponse updateUser(UserEntity user);
 	
 	public ApiResponse deleteUser(Long userId);
 	
 	public ApiResponse forgotPassword(String userNameOrEmail);
 
-	public List<User> getAllUsersByRole(Long userTypeId);
+	public List<UserEntity> getAllUsersByRole(Long userTypeId);
 
 	public ApiResponse changeUserPassword(@Valid LoginRequest loginRequest);
 }

@@ -7,6 +7,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Shashank
  *
@@ -27,12 +29,18 @@ public class Role extends BaseEntity {
 	*/
 	private static final long serialVersionUID = -2263208241269807057L;
 
+	
 	@Column(length = 60, unique = true)
 	private String name;
-	
+	@JsonIgnore
 	@Column(nullable = false, columnDefinition = "boolean default false")
 	private boolean systemRole;
+	@JsonIgnore
 	private Long userTypeId;
+	
+	
+	@Column(length = 60, unique = true)
+	private String code;
 	
 	/*
 	 * userTypeId 1 = Super Admin
@@ -45,7 +53,7 @@ public class Role extends BaseEntity {
 	 * userTypeId 8 = Store Keeper
 	 * userTypeId 9 = Supplier
 	  */
-	
+	@JsonIgnore
 	@Transient
 	private List<RoleAllotedPermission> roleAllotedPermission;
 
@@ -113,8 +121,20 @@ public class Role extends BaseEntity {
 		this.userTypeId = userTypeId;
 	}
 
-	
+	/**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
 
 	
-
+	
 }

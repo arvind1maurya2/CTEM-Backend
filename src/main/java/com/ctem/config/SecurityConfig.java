@@ -85,8 +85,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
 				.antMatchers("/api/basic/**").permitAll()
-				.antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability",
-						"/api/user/forgotPassword", "/api/user/changeUserPassword")
+				.antMatchers("/api/user1/checkUsernameAvailability", "/api/user1/checkEmailAvailability",
+						"/api/user1/forgotPassword", "/api/user1/changeUserPassword")
 				.permitAll().antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**").permitAll().anyRequest()
 				.authenticated();
 

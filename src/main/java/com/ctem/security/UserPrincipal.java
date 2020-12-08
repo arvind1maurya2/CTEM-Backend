@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.ctem.entity.Role;
-import com.ctem.entity.User;
+import com.ctem.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -49,7 +49,7 @@ public class UserPrincipal implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserPrincipal create(User user) {
+	public static UserPrincipal create(UserEntity user) {
 		Role role = user.getRole();
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(role.getName()));

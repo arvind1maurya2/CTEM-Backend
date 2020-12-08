@@ -1,7 +1,7 @@
 package com.ctem.payload;
 import org.apache.commons.lang3.StringUtils;
 
-import com.ctem.entity.User;
+import com.ctem.entity.UserEntity;
 
 /**
  * @author Shashank
@@ -11,13 +11,13 @@ public class JwtAuthenticationResponse {
 
 	private String accessToken;
 	private String tokenType = "Basic";
-	private User user;
+	private UserEntity user;
 
 	/**
 	 * @param accessToken
 	 * @param user
 	 */
-	public JwtAuthenticationResponse(String accessToken, User user) {
+	public JwtAuthenticationResponse(String accessToken, UserEntity user) {
 		super();
 		this.accessToken = accessToken;
 		if(StringUtils.isNotBlank(user.getPassword())) {
@@ -57,14 +57,14 @@ public class JwtAuthenticationResponse {
 	/**
 	 * @return the user
 	 */
-	public User getUser() {
+	public UserEntity getUser() {
 		return user;
 	}
 
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(User user) {
+	public void setUser(UserEntity user) {
 		this.user = user;
 	}
 

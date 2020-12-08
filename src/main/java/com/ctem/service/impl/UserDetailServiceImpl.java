@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import com.ctem.constant.StatusMessage;
 import com.ctem.entity.BaseEntity;
 import com.ctem.entity.Role;
-import com.ctem.entity.User;
+import com.ctem.entity.UserEntity;
 import com.ctem.exception.BadRequestException;
 import com.ctem.exception.UserPrivilegeException;
 import com.ctem.payload.ApiResponse;
@@ -56,7 +56,7 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 	@Transactional
 	public ApiResponse changePassword(Long userId, String password) {
 		try {
-			User user = entityManager.find(User.class, userId);
+			UserEntity user = entityManager.find(UserEntity.class, userId);
 			user.setPassword(passwordEncoder.encode(password));
 			String content = HELLO + " " + StringUtils.capitalize(user.getFirstName()) + CHANGE_PASSWORD_BODY + "\n"
 					+ EMAIL + user.getEmail() + "\n" + PASSWORD + password + MANUAL_GREET;
@@ -89,10 +89,10 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 	 * INCORRECT_PASSWORD); }
 	 */
 	@Override
-	public User findByUsernameOrEmail(String usernameOrEmail) {
-		User user = null;
+	public UserEntity findByUsernameOrEmail(String usernameOrEmail) {
+		UserEntity user = null;
 		@SuppressWarnings("unchecked")
-		List<User> users = entityManager.createNamedQuery("User.findByUsernameOrEmail")
+		List<UserEntity> users = entityManager.createNamedQuery("UserEntity.findByUsernameOrEmail")
 				.setParameter("email", usernameOrEmail).getResultList();
 		if (users != null) {
 			user = users.get(0);
@@ -102,10 +102,10 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 
 	@Override
 	@Transactional
-	public ApiResponse createUser(User user) throws UserPrivilegeException {
+	public ApiResponse createUser(UserEntity user) throws UserPrivilegeException {
 		try {
 			// check user who perform this action has authority to create or not
-			User currentUser = entityManager.find(User.class, BaseEntity.currentUserId.get());
+			UserEntity currentUser = entityManager.find(UserEntity.class, BaseEntity.currentUserId.get());
 			if (currentUser.getRole().getId() != 1) {
 				throw new UserPrivilegeException("You are not authorised to perform this operation.");
 			}
@@ -115,17 +115,17 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 			if (userRepository.existsByEmail(user.getEmail())) {
 				throw new BadRequestException("Email Address already in use!");
 			}
-			User newuser = null;
+			UserEntity newuser = null;
 			// Creating user's account
-			if (user.getMiddleName() == null) {
-				newuser = new User(user.getEmail(), user.getFirstName(), user.getLastName(), user.getUsername(),
+			//if (user.getMiddleName() == null) {
+				newuser = new UserEntity(user.getEmail(), user.getFirstName(), user.getLastName(), user.getUsername(),
 						user.getPassword());
-			} else {
-				newuser = new User(user.getEmail(), user.getFirstName(), user.getMiddleName(), user.getLastName(),
-						user.getUsername(), user.getEmail(), user.getPassword());
-			}
+			///} else {
+			///	newuser = new UserEntity(user.getEmail(), user.getFirstName(), user.getMiddleName(), user.getLastName(),
+			///			user.getUsername(), user.getEmail(), user.getPassword());
+			///}
 			newuser.setArchived(user.isArchived());
-			newuser.setFirstLogin(true);
+			//newuser.setFirstLogin(true);
 			newuser.setPassword(passwordEncoder.encode(user.getPassword()));
 			Role role = roleRepository.getOne(user.getRoleId());
 			newuser.setRole(role);
@@ -142,9 +142,9 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 
 	@Override
 	@Transactional
-	public ApiResponse updateUser(User user) {
+	public ApiResponse updateUser(UserEntity user) {
 		try {
-			User olduser = entityManager.find(User.class, user.getId());
+			UserEntity olduser = entityManager.find(UserEntity.class, user.getId());
 			if (StringUtils.isNotBlank(olduser.getPassword())) {
 				user.setPassword(olduser.getPassword());
 			}
@@ -160,13 +160,13 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> getAllUsers() {
-		return entityManager.createNamedQuery("User.getAllUsers").getResultList();
+	public List<UserEntity> getAllUsers() {
+		return entityManager.createNamedQuery("UserEntity.getAllUsers").getResultList();
 	}
 
 	@Override
-	public User getUserById(Long userId) {
-		User user = entityManager.find(User.class, userId);
+	public UserEntity getUserById(Long userId) {
+		UserEntity user = entityManager.find(UserEntity.class, userId);
 		user.setPassword(null);
 		user.setRoleId(user.getRole().getId());
 		return user;
@@ -175,7 +175,7 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 	@Override
 	@Transactional
 	public ApiResponse deleteUser(Long userId) {
-		User user = entityManager.find(User.class, userId);
+		UserEntity user = entityManager.find(UserEntity.class, userId);
 		if (user.isArchived()) {
 			return new ApiResponse(true, "User" + ALREADY_DELETED_MESSAGE);
 		}
@@ -190,7 +190,7 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 	@Override
 	public ApiResponse forgotPassword(String userNameOrEmail) throws UsernameNotFoundException {
 		try {
-			User user = findByUsernameOrEmail(userNameOrEmail);
+			UserEntity user = findByUsernameOrEmail(userNameOrEmail);
 			if (user == null) {
 				throw new UsernameNotFoundException("User not found with username or email : " + userNameOrEmail);
 			}
@@ -213,8 +213,8 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> getAllUsersByRole(Long userTypeId) {
-		List<User> allusers = entityManager.createNamedQuery("User.getAllUsersByRole")
+	public List<UserEntity> getAllUsersByRole(Long userTypeId) {
+		List<UserEntity> allusers = entityManager.createNamedQuery("UserEntity.getAllUsersByRole")
 				.setParameter("userTypeId", userTypeId).getResultList();
 		return allusers;
 	}
@@ -222,7 +222,7 @@ public class UserDetailServiceImpl extends StatusMessage implements UserDetailSe
 	@Override
 	@Transactional
 	public ApiResponse changeUserPassword(@Valid LoginRequest loginRequest) {
-		User user = findByUsernameOrEmail(loginRequest.getUserNameOrEmail());
+		UserEntity user = findByUsernameOrEmail(loginRequest.getUsername());
 		user.setPassword(passwordEncoder.encode(loginRequest.getPassword()));
 		entityManager.merge(user);
 		entityManager.flush();
