@@ -63,5 +63,7 @@ public class AuthController {
 		}
 		return new ResponseEntity<>(districts, HttpStatus.OK);
 	}
-
+	//TenantAdministrationAPI tenantAdministrationAPI = org.bonitasoft.engine.api.TenantAPIAccessor.getTenantAdministrationAPI(BaseEntity.apiSession.get());
+	//File file = new File("D://bdmClient.zip");
+	//FileUtils.writeByteArrayToFile(file,  tenantAdministrationAPI.getClientBDMZip());			
 }

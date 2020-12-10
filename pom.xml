@@ -131,6 +131,27 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.bonitasoft.bdm</groupId>
+			<artifactId>bdm-dao</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>D://bdm-dao.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.bonitasoft.bdm</groupId>
+			<artifactId>bdm-model</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>D://bdm-model.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.1-GA</version>
+		</dependency>
+		 -->
 	</dependencies>
 
 	<build>
