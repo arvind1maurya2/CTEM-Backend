@@ -21,19 +21,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
-public class Designation {
+public class Designation extends BaseEntity {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "persistenceid")
-	private Long id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private Long persistenceversion;
 	
 	@JsonIgnore
-	@Column(updatable = true, nullable = false)
 	private String code;
 	
 	@Column(updatable = true, nullable = false)
@@ -54,54 +50,9 @@ public class Designation {
 	@JsonIgnore
 	@Column(updatable = true, nullable = true)
 	private int sortOrder;
-
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private Calendar creationDate;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private int createdBy;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private Calendar lastUpdateDate;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private int last_updated_by;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true, columnDefinition = "boolean default false")
-	private boolean delete;
-	
 	@JsonIgnore
 	@Column(updatable = true, nullable = true, columnDefinition = "boolean default true")
-	private boolean active;
-
-	
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getPersistenceversion() {
-		return persistenceversion;
-	}
-
-	public void setPersistenceversion(Long persistenceversion) {
-		this.persistenceversion = persistenceversion;
-	}
+	private boolean enable;
 
 	public String getCode() {
 		return code;
@@ -151,53 +102,12 @@ public class Designation {
 		this.sortOrder = sortOrder;
 	}
 
-	public Calendar getCreationDate() {
-		return creationDate;
+	public boolean isEnable() {
+		return enable;
 	}
 
-	public void setCreationDate(Calendar creationDate) {
-		this.creationDate = creationDate;
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
 
-	public int getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(int createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Calendar getLastUpdateDate() {
-		return lastUpdateDate;
-	}
-
-	public void setLastUpdateDate(Calendar lastUpdateDate) {
-		this.lastUpdateDate = lastUpdateDate;
-	}
-
-	public int getLast_updated_by() {
-		return last_updated_by;
-	}
-
-	public void setLast_updated_by(int last_updated_by) {
-		this.last_updated_by = last_updated_by;
-	}
-
-	public boolean isDelete() {
-		return delete;
-	}
-
-	public void setDelete(boolean delete) {
-		this.delete = delete;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	
 }

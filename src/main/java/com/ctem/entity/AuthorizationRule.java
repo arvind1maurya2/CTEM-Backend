@@ -31,12 +31,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	@NamedQuery(name = "AuthorizationRule.findAllChildMenus", query = "SELECT sbm FROM AuthorizationRule sbm WHERE sbm.parentId = :parentId order by sbm.sortOrder")
 
 })
-public class AuthorizationRule {
-
-	@JsonIgnore
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+public class AuthorizationRule extends BaseEntity {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Column(updatable = true, nullable = false)
 	private String name;
 	
@@ -61,37 +59,12 @@ public class AuthorizationRule {
 	@JsonIgnore
 	@Column(updatable = true, nullable = true)
 	private int sortOrder;
-
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private Calendar creationDate;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private int createdBy;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private Calendar lastUpdateDate;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private int last_updated_by;
-	
 	@JsonIgnore
 	@Column(updatable = true, nullable = true, columnDefinition = "boolean default true")
-	private boolean active;
+	private boolean enable;
 	
 	@Transient
 	private List<AuthorizationRule> submenus;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -148,45 +121,11 @@ public class AuthorizationRule {
 	public void setSortOrder(int sortOrder) {
 		this.sortOrder = sortOrder;
 	}
-
-	public Calendar getCreationDate() {
-		return creationDate;
+	public boolean isEnable() {
+		return enable;
 	}
-
-	public void setCreationDate(Calendar creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public int getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(int createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Calendar getLastUpdateDate() {
-		return lastUpdateDate;
-	}
-
-	public void setLastUpdateDate(Calendar lastUpdateDate) {
-		this.lastUpdateDate = lastUpdateDate;
-	}
-
-	public int getLast_updated_by() {
-		return last_updated_by;
-	}
-
-	public void setLast_updated_by(int last_updated_by) {
-		this.last_updated_by = last_updated_by;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
 
 	public List<AuthorizationRule> getSubmenus() {
@@ -196,6 +135,4 @@ public class AuthorizationRule {
 	public void setSubmenus(List<AuthorizationRule> submenus) {
 		this.submenus = submenus;
 	}
-
-	
 }

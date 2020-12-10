@@ -29,8 +29,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class BaseEntity implements Serializable {
 
 	public static ThreadLocal<Long> currentUserId = new ThreadLocal<Long>();
-	//public static ThreadLocal<String> currentuserName = new ThreadLocal<String>();
-	//public static ThreadLocal<String> bonitaAccessToken = new ThreadLocal<String>();
 	public static ThreadLocal<APISession> apiSession = new ThreadLocal<APISession>();
 	public static ThreadLocal<APIClient> apiClient = new ThreadLocal<APIClient>();
 	

@@ -29,7 +29,6 @@ public class Role extends BaseEntity {
 	*/
 	private static final long serialVersionUID = -2263208241269807057L;
 
-	
 	@Column(length = 60, unique = true)
 	private String name;
 	@JsonIgnore
@@ -37,8 +36,6 @@ public class Role extends BaseEntity {
 	private boolean systemRole;
 	@JsonIgnore
 	private Long userTypeId;
-	
-	
 	@Column(length = 60, unique = true)
 	private String code;
 	
@@ -134,7 +131,5 @@ public class Role extends BaseEntity {
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-	
 	
 }

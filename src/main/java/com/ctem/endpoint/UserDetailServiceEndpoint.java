@@ -45,12 +45,6 @@ public class UserDetailServiceEndpoint {
 		return userDetailService.changePassword(userId, password);
 	}
 
-	/*
-	 * @PostMapping("/changePasswordUser") public ApiResponse
-	 * changePasswordAuthenticateByUser(@RequestBody ChangePasswordModal
-	 * changePasswordModal) throws IOException { return
-	 * userDetailService.changePassword(changePasswordModal); }
-	 */
 	@PostMapping("/changeUserPassword")
 	public ApiResponse changeUserPassword(@Valid @RequestBody LoginRequest loginRequest) throws IOException {
 		return userDetailService.changeUserPassword(loginRequest);

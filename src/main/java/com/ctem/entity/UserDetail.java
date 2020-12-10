@@ -44,8 +44,6 @@ public class UserDetail {
 		this.id = id;
 	}
 	
-
-
 	public Long getUserId() {
 		return userId;
 	}
@@ -112,15 +110,9 @@ public class UserDetail {
 	public void setDivision(String division) {
 		this.division = division;
 	}
-	/**
-	 * @return the enable
-	 */
 	public boolean isEnable() {
 		return enable;
 	}
-	/**
-	 * @param enable the enable to set
-	 */
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}

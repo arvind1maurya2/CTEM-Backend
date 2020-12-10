@@ -25,6 +25,7 @@ import org.bonitasoft.engine.platform.UnknownUserException;
 import org.bonitasoft.engine.session.APISession;
 import org.bonitasoft.engine.util.APITypeManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -63,6 +64,9 @@ import com.ctem.service.UserDetailService;
 @RequestMapping("/api/basic")
 public class BasicController extends StatusMessage {
 
+	@Value("${app.bonitaURL}")
+	private String bonitaURL;
+	
 	@Autowired
 	AuthenticationManager authenticationManager;
 
@@ -89,7 +93,7 @@ public class BasicController extends StatusMessage {
 		String msg = "something wents wrong";
 		try {
 			Map<String, String> settings = new HashMap<String, String>();
-			settings.put("server.url", "http://3.6.207.6:8080");
+			settings.put("server.url", bonitaURL);
 			settings.put("application.name", "bonita");
 			APITypeManager.setAPITypeAndParams(ApiAccessType.HTTP, settings);
 			LoginAPI loginAPI = TenantAPIAccessor.getLoginAPI();
@@ -136,6 +140,7 @@ public class BasicController extends StatusMessage {
 		}
 		return new ResponseEntity(new ApiResponse(false, msg), HttpStatus.UNAUTHORIZED);
 	}
+	/*
 	@GetMapping("/menus")
 	public ResponseEntity<?> dashboard(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(required = false) String userId) {
@@ -148,5 +153,5 @@ public class BasicController extends StatusMessage {
 			msg = e.getMessage();
 		}
 		return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
-	}
+	}*/
 }

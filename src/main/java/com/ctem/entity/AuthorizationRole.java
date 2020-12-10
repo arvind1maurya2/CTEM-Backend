@@ -21,11 +21,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "authorization_role")
-public class AuthorizationRole {
+public class AuthorizationRole extends BaseEntity {
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	 @Column(updatable = true, nullable = false)
     private String name;
     @Column(updatable = true, nullable = true)
@@ -34,28 +35,8 @@ public class AuthorizationRole {
     private String permissions;
     @Column(updatable = true, nullable = true)
     private int profileId;
-    @Column(updatable = true, nullable = true)
-    private Calendar creationDate;
-    @Column(updatable = true, nullable = true)
-    private int createdBy;
-    @Column(updatable = true, nullable = true)
-    private Calendar lastUpdateDate;
-    @Column(updatable = true, nullable = true)
-    private int last_updated_by;
     @Column(updatable = true, nullable = true, columnDefinition = "boolean default true")
-    private boolean isActive;
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private boolean enable;
 	/**
 	 * @return the name
 	 */
@@ -68,9 +49,15 @@ public class AuthorizationRole {
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
+	/**
+	 * @param description the description to set
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -99,67 +86,17 @@ public class AuthorizationRole {
 		this.profileId = profileId;
 	}
 	/**
-	 * @return the creationDate
+	 * @return the enable
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	public Calendar getCreationDate() {
-		return creationDate;
+	public boolean isEnable() {
+		return enable;
 	}
 	/**
-	 * @param creationDate the creationDate to set
+	 * @param enable the enable to set
 	 */
-	public void setCreationDate(Calendar creationDate) {
-		this.creationDate = creationDate;
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
-	/**
-	 * @return the createdBy
-	 */
-	public int getCreatedBy() {
-		return createdBy;
-	}
-	/**
-	 * @param createdBy the createdBy to set
-	 */
-	public void setCreatedBy(int createdBy) {
-		this.createdBy = createdBy;
-	}
-	/**
-	 * @return the lastUpdateDate
-	 */
-	public Calendar getLastUpdateDate() {
-		return lastUpdateDate;
-	}
-	/**
-	 * @param lastUpdateDate the lastUpdateDate to set
-	 */
-	public void setLastUpdateDate(Calendar lastUpdateDate) {
-		this.lastUpdateDate = lastUpdateDate;
-	}
-	/**
-	 * @return the last_updated_by
-	 */
-	public int getLast_updated_by() {
-		return last_updated_by;
-	}
-	/**
-	 * @param last_updated_by the last_updated_by to set
-	 */
-	public void setLast_updated_by(int last_updated_by) {
-		this.last_updated_by = last_updated_by;
-	}
-	/**
-	 * @return the isActive
-	 */
-	public boolean isActive() {
-		return isActive;
-	}
-	/**
-	 * @param isActive the isActive to set
-	 */
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-    
-    
 
+    
 }

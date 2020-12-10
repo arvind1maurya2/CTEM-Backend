@@ -23,6 +23,7 @@ import org.bonitasoft.engine.util.APITypeManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,6 +42,8 @@ import com.ctem.repository.UserRepository;
  */
 public class JWTAuthenticationFilter extends OncePerRequestFilter{
 	
+	@Value("${app.bonitaURL}")
+	private String bonitaURL;
 	@Autowired
     private JWTTokenProvider tokenProvider;
 
@@ -67,7 +70,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter{
                 //System.out.println(Base64.getEncoder().encodeToString("4444".getBytes()));
                 byte [] encodedPassword = Base64.getDecoder().decode(user.getBonitaAccessToken());
                 Map<String, String> settings = new HashMap<String, String>();
-    			settings.put("server.url", "http://3.6.207.6:8080");
+    			settings.put("server.url", bonitaURL);
     			settings.put("application.name", "bonita");
     			APITypeManager.setAPITypeAndParams(ApiAccessType.HTTP, settings);
     			LoginAPI loginAPI = TenantAPIAccessor.getLoginAPI();
