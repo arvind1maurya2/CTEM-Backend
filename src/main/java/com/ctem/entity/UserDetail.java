@@ -17,6 +17,12 @@ public class UserDetail {
 	private String district;
 	private String state;
 	private boolean enable;
+	private Office officeObj;
+	private Role roleObj;
+	private Division divisionObj;
+	private String roleName;
+	private String divisionName;
+	private String officeName;
 	
 	
 	public String getDistrict() {
@@ -115,6 +121,78 @@ public class UserDetail {
 	}
 	public void setEnable(boolean enable) {
 		this.enable = enable;
+	}
+	/**
+	 * @return the officeObj
+	 */
+	public Office getOfficeObj() {
+		return officeObj;
+	}
+	/**
+	 * @param officeObj the officeObj to set
+	 */
+	public void setOfficeObj(Office officeObj) {
+		this.officeObj = officeObj;
+	}
+	/**
+	 * @return the roleObj
+	 */
+	public Role getRoleObj() {
+		return roleObj;
+	}
+	/**
+	 * @param roleObj the roleObj to set
+	 */
+	public void setRoleObj(Role roleObj) {
+		this.roleObj = roleObj;
+	}
+	/**
+	 * @return the divisionObj
+	 */
+	public Division getDivisionObj() {
+		return divisionObj;
+	}
+	/**
+	 * @param divisionObj the divisionObj to set
+	 */
+	public void setDivisionObj(Division divisionObj) {
+		this.divisionObj = divisionObj;
+	}
+	/**
+	 * @return the roleName
+	 */
+	public String getRoleName() {
+		return roleName;
+	}
+	/**
+	 * @param roleName the roleName to set
+	 */
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+	/**
+	 * @return the divisionName
+	 */
+	public String getDivisionName() {
+		return divisionName;
+	}
+	/**
+	 * @param divisionName the divisionName to set
+	 */
+	public void setDivisionName(String divisionName) {
+		this.divisionName = divisionName;
+	}
+	/**
+	 * @return the officeName
+	 */
+	public String getOfficeName() {
+		return officeName;
+	}
+	/**
+	 * @param officeName the officeName to set
+	 */
+	public void setOfficeName(String officeName) {
+		this.officeName = officeName;
 	}
 	
 }

@@ -57,5 +57,9 @@ public class OfficeServiceImpl {
 				.setType(OperatorType.ASSIGNMENT).setRightOperand(expression).done();
 		return operation;
 	}
+	//ProcessAPI processAPI = BaseEntity.apiClient.get().getProcessAPI();
+	//List<ArchivedProcessInstance> a=processAPI.searchArchivedProcessInstances(new SearchOptionsBuilder(0, 100).done()).getResult();
+	//List<ArchivedDataInstance> aa= processAPI.getArchivedActivityDataInstances(2002, 0, 100);
+	//long processInstance = processAPI.getNumberOfArchivedProcessInstances();//(Long.parseLong("4680666241133101661"),0,1000000000);
 
 }

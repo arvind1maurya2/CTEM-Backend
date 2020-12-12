@@ -36,8 +36,7 @@ public class Role extends BaseEntity {
 	private boolean systemRole;
 	@JsonIgnore
 	private Long userTypeId;
-	@Column(length = 60, unique = true)
-	private String code;
+	private String Description;
 	
 	/*
 	 * userTypeId 1 = Super Admin
@@ -119,17 +118,17 @@ public class Role extends BaseEntity {
 	}
 
 	/**
-	 * @return the code
+	 * @return the description
 	 */
-	public String getCode() {
-		return code;
+	public String getDescription() {
+		return Description;
 	}
 
 	/**
-	 * @param code the code to set
+	 * @param description the description to set
 	 */
-	public void setCode(String code) {
-		this.code = code;
+	public void setDescription(String description) {
+		Description = description;
 	}
-	
+
 }

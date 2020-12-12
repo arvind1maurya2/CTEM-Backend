@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,61 +32,66 @@ public class District extends BaseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@JsonIgnore
-	@Column(updatable = true, nullable = false)
+	
+	@NotBlank
+	@Column(unique = true)
 	private String code;
-	@Column(updatable = true, nullable = false)
+	@NotBlank
+	@Column(unique = true)
 	private String name;
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private int sortOrder;
+	
+	@NotBlank
+	private Long stateId;
+	
 	@Transient
 	private List<City> cities;
-
-	public List<City> getCities() {
-		return cities;
-	}
-
-	public void setCities(List<City> cities) {
-		this.cities = cities;
-	}
-
-	@JsonIgnore
-	@Column(updatable = true, nullable = true, columnDefinition = "boolean default true")
-	private boolean enable;
-
+	/**
+	 * @return the code
+	 */
 	public String getCode() {
 		return code;
 	}
-
+	/**
+	 * @param code the code to set
+	 */
 	public void setCode(String code) {
 		this.code = code;
 	}
-
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
-
+	/**
+	 * @param name the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getSortOrder() {
-		return sortOrder;
+	/**
+	 * @return the stateId
+	 */
+	public Long getStateId() {
+		return stateId;
 	}
-
-	public void setSortOrder(int sortOrder) {
-		this.sortOrder = sortOrder;
+	/**
+	 * @param stateId the stateId to set
+	 */
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
 	}
-
-	public boolean isEnable() {
-		return enable;
+	/**
+	 * @return the cities
+	 */
+	public List<City> getCities() {
+		return cities;
 	}
-
-	public void setEnable(boolean enable) {
-		this.enable = enable;
+	/**
+	 * @param cities the cities to set
+	 */
+	public void setCities(List<City> cities) {
+		this.cities = cities;
 	}
-
-	 
 
 }

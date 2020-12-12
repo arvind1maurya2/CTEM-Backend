@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,81 +26,57 @@ public class Division extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = false)
+	@NotBlank
+	@Column(unique = true)
 	private String code;
-	@Column(updatable = true, nullable = false)
-	private String name;
-	@JsonIgnore
-	@Column(updatable = true, nullable = false)
-	private String office_id;
-	@JsonIgnore
-	@Column(updatable = true, nullable = false)
-	private String district_id;
-	@JsonIgnore
-	@Column(updatable = true, nullable = false)
-	private int city_id;
-	@JsonIgnore
-	private int sortOrder;
-	@JsonIgnore
-	@Column(updatable = true, nullable = true, columnDefinition = "boolean default true")
-	private boolean enable;
 	
+	@NotBlank
+	@Column(unique = true)
+	private String name;
+	
+	@NotBlank
+	private Long office_id;
+
+	/**
+	 * @return the code
+	 */
 	public String getCode() {
 		return code;
 	}
 
+	/**
+	 * @param code the code to set
+	 */
 	public void setCode(String code) {
 		this.code = code;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getOffice_id() {
+	/**
+	 * @return the office_id
+	 */
+	public Long getOffice_id() {
 		return office_id;
 	}
 
-	public void setOffice_id(String office_id) {
+	/**
+	 * @param office_id the office_id to set
+	 */
+	public void setOffice_id(Long office_id) {
 		this.office_id = office_id;
-	}
-
-	public String getDistrict_id() {
-		return district_id;
-	}
-
-	public void setDistrict_id(String district_id) {
-		this.district_id = district_id;
-	}
-
-	public int getCity_id() {
-		return city_id;
-	}
-
-	public void setCity_id(int city_id) {
-		this.city_id = city_id;
-	}
-
-	public int getSortOrder() {
-		return sortOrder;
-	}
-
-	public void setSortOrder(int sortOrder) {
-		this.sortOrder = sortOrder;
-	}
-
-	public boolean isEnable() {
-		return enable;
-	}
-
-	public void setEnable(boolean enable) {
-		this.enable = enable;
 	}
 	
 }

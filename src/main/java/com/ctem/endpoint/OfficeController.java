@@ -5,12 +5,10 @@ package com.ctem.endpoint;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +34,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,10 +62,8 @@ public class OfficeController {
 	DistrictRepository districtRepository;
 	@Autowired
 	CityRepository cityRepository;
-	
-	@Autowired
-	EntityManager entityManager;
-	
+
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping("/create-office")
 	public ResponseEntity<?> createOffice(HttpServletRequest request, HttpServletResponse response,
@@ -106,9 +103,11 @@ public class OfficeController {
 			ProcessInstance processInstance = null;
 			processInstance = processAPI.startProcessWithInputs(archActivitResult.getResult().get(0).getProcessId(),
 					varMap);
-			//TenantAdministrationAPI tenantAdministrationAPI = org.bonitasoft.engine.api.TenantAPIAccessor.getTenantAdministrationAPI(BaseEntity.apiSession.get());
-			//File file = new File("D://bdmClient.zip");
-			//FileUtils.writeByteArrayToFile(file,  tenantAdministrationAPI.getClientBDMZip());			
+			// TenantAdministrationAPI tenantAdministrationAPI =
+			// org.bonitasoft.engine.api.TenantAPIAccessor.getTenantAdministrationAPI(BaseEntity.apiSession.get());
+			// File file = new File("D://bdmClient.zip");
+			// FileUtils.writeByteArrayToFile(file,
+			// tenantAdministrationAPI.getClientBDMZip());
 			return new ResponseEntity(new ApiResponse(true, "Office Created", processInstance.getId()), HttpStatus.OK);
 		} catch (ProcessDefinitionNotFoundException e) {
 			msg = e.getMessage();
@@ -138,11 +137,41 @@ public class OfficeController {
 		return new ResponseEntity(new ApiResponse(false, msg), HttpStatus.BAD_REQUEST);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@PutMapping("/update-office-by-id")
+	public ResponseEntity<?> updateOfficeById(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody(required = false) OfficeDetails o) throws SQLException {
+		String msg = "something wents wrong";
+		try {
+			if (o.getId() > 0) {
+				Office office =officeRepository.findById(o.getId()).get();
+				office.setCode(o.getCode());
+				office.setName(o.getName());
+				office.setType(o.getType());
+				office.setMobileNumber(o.getMobileNumber());
+				office.setAddress(o.getAddress());
+				office.setDistrict(o.getDistrict());
+				office.setCity(o.getCity());
+				Office a = officeRepository.save(office);
+				System.out.println(a.getName());
+				return new ResponseEntity(new ApiResponse(true, "Office Updated",o.getId()), HttpStatus.OK);
+			} else {
+				return new ResponseEntity(new ApiResponse(false, "Office id can't be blank!"), HttpStatus.BAD_REQUEST);
+			}
+		} catch (BonitaRuntimeException e) {
+			msg = e.getMessage();
+			e.printStackTrace();
+		} catch (Exception e) {
+			msg = e.getMessage();
+			e.printStackTrace();
+		}
+		return new ResponseEntity(new ApiResponse(false, msg), HttpStatus.BAD_REQUEST);
+	}
+
 	@GetMapping("/offices-list")
 	public ResponseEntity<?> officesList(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		String msg = "something wents wrong";
 		try {
-			// List<OfficeDTO> offices= entityManager.createNamedQuery("Office.getAllOffices").getResultList();
 			List<Office> offices = officeRepository.findByArchived(false);
 			for (Office office : offices) {
 				office.setDistrictName(districtRepository.getOne(office.getDistrict()).getName());

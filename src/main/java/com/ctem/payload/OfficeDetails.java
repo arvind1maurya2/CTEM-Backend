@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
  */
 public class OfficeDetails {
 
+	private Long id;
 	private String name;
 	private String type;
 	private String code;
@@ -18,6 +19,20 @@ public class OfficeDetails {
 	private Long city;
 	private String mobileNumber;
 	private String address;
+	
+	
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 	/**
 	 * @return the name
 	 */

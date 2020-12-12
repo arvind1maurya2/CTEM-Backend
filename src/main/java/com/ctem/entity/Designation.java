@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,86 +30,54 @@ public class Designation extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
-	@JsonIgnore
-	private String code;
-	
-	@Column(updatable = true, nullable = false)
+	@NotBlank
+	@Column(unique = true)
 	private String name;
 	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private String description;
+	private Long office_id;
 	
-	@JsonIgnore
-	@Column(updatable = true, nullable = false)
-	private int office_id;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private String division_id;
-	
-	@JsonIgnore
-	@Column(updatable = true, nullable = true)
-	private int sortOrder;
-	@JsonIgnore
-	@Column(updatable = true, nullable = true, columnDefinition = "boolean default true")
-	private boolean enable;
+	private Long division_id;
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getOffice_id() {
+	/**
+	 * @return the office_id
+	 */
+	public Long getOffice_id() {
 		return office_id;
 	}
 
-	public void setOffice_id(int office_id) {
+	/**
+	 * @param office_id the office_id to set
+	 */
+	public void setOffice_id(Long office_id) {
 		this.office_id = office_id;
 	}
 
-	public String getDivision_id() {
+	/**
+	 * @return the division_id
+	 */
+	public Long getDivision_id() {
 		return division_id;
 	}
 
-	public void setDivision_id(String division_id) {
+	/**
+	 * @param division_id the division_id to set
+	 */
+	public void setDivision_id(Long division_id) {
 		this.division_id = division_id;
-	}
-
-	public int getSortOrder() {
-		return sortOrder;
-	}
-
-	public void setSortOrder(int sortOrder) {
-		this.sortOrder = sortOrder;
-	}
-
-	public boolean isEnable() {
-		return enable;
-	}
-
-	public void setEnable(boolean enable) {
-		this.enable = enable;
 	}
 
 }

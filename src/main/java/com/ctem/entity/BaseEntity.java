@@ -38,21 +38,16 @@ public class BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "persistenceid", updatable = false, nullable = false)
 	private Long id;
-
 	@JsonIgnore
 	@CreatedDate
 	private Calendar creationDate;
 	@JsonIgnore
 	@LastModifiedDate
 	private Calendar updationDate;
-
 	@JsonIgnore
 	private Long createdUserId;
 	@JsonIgnore
 	private Long updatedUserId;
-	@JsonIgnore
-	@Version
-	private Long version;
 	@JsonIgnore
 	@Column(nullable = false, columnDefinition = "boolean default false")
 	private boolean archived;
@@ -115,20 +110,6 @@ public class BaseEntity implements Serializable {
 	 */
 	public void setUpdatedUserId(Long updatedUserId) {
 		this.updatedUserId = updatedUserId;
-	}
-
-	/**
-	 * @return the version
-	 */
-	public Long getVersion() {
-		return version;
-	}
-
-	/**
-	 * @param version the version to set
-	 */
-	public void setVersion(Long version) {
-		this.version = version;
 	}
 
 	@PrePersist
