@@ -11,7 +11,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import org.bonitasoft.engine.api.APIClient;
 import org.bonitasoft.engine.session.APISession;
@@ -21,10 +20,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
-
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 

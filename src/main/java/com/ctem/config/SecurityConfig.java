@@ -20,6 +20,11 @@ import com.ctem.security.CustomUserDetailsService;
 import com.ctem.security.JWTAuthenticationEntryPoint;
 import com.ctem.security.JWTAuthenticationFilter;
 
+/**
+ * 
+ * @author Arvind Maurya
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)

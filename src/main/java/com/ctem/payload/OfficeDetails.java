@@ -3,8 +3,6 @@
  */
 package com.ctem.payload;
 
-import javax.validation.constraints.NotBlank;
-
 /**
  * @author Arvind Maurya
  *

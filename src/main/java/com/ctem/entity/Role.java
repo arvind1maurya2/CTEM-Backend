@@ -10,10 +10,10 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
-
 @Entity 
 @NamedQueries({ 
 	@NamedQuery(name = "Role.getActiveRoles", query = "SELECT r fROM Role r WHERE r.archived='false' AND r.id not in ('1') ORDER BY r.creationDate DESC"),

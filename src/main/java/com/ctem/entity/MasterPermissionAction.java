@@ -5,7 +5,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
 @Entity

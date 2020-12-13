@@ -4,7 +4,11 @@ import java.util.List;
 import com.ctem.entity.Role;
 import com.ctem.entity.UserType;
 import com.ctem.payload.ApiResponse;
-
+/**
+ * 
+ * @author Arvind Maurya
+ *
+ */
 public interface RoleService {
 	public ApiResponse createRole(Role role);
 	public ApiResponse updateRole(Role role);

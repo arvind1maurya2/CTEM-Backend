@@ -12,7 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
 @Entity

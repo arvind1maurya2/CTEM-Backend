@@ -1,6 +1,5 @@
 package com.ctem.endpoint;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,14 +16,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ctem.entity.AuthorizationRule;
-import com.ctem.entity.City;
 import com.ctem.entity.District;
 import com.ctem.payload.ApiResponse;
 import com.ctem.repository.CityRepository;
 import com.ctem.repository.DistrictRepository;
 import com.ctem.service.AuthenticationService;
 
+/**
+ * 
+ * @author Arvind Maurya
+ *
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("/api/auth")
@@ -39,6 +41,14 @@ public class AuthController {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * @author Arvind Maurya
+	 * @since 2020-12-14
+	 * @param request
+	 * @param response
+	 * @param userId
+	 * @return
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/menus/{userId}")
 	public ResponseEntity<?> getSidebarContent(HttpServletRequest request, HttpServletResponse response,
@@ -50,10 +60,16 @@ public class AuthController {
 		}
 	}
 
+	/**
+	 * @author Arvind Maurya
+	 * @since 2020-12-14
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@GetMapping("/get-district-city-list")
 	public ResponseEntity<?> getDistrictCityList(HttpServletRequest request, HttpServletResponse response) {
-
 		List<District> districts = districtRepository.findAll();
 		if (districts != null) {
 			for (District district : districts) {

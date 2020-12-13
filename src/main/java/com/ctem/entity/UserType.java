@@ -4,10 +4,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
- * @author shashank
+ * 
+ * @author Arvind Maurya
  *
  */
-
 @Entity
 @NamedQueries({ 
 	@NamedQuery(name = "UserType.getAllActiveUserTypes", query = "SELECT ut fROM UserType ut WHERE ut.archived='false' AND ut.id not in ('1') ORDER BY creationDate DESC"),

@@ -15,7 +15,11 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
+/**
+ * 
+ * @author Arvind Maurya
+ *
+ */
 @Entity
 @NamedQueries({ 
 	@NamedQuery(name = "UserEntity.findAll", query = "SELECT u FROM UserEntity u  ORDER BY u.creationDate DESC"),
