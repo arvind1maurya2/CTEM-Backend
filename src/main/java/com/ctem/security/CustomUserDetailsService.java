@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ctem.entity.User;
+import com.ctem.entity.UserEntity;
 import com.ctem.repository.UserRepository;
 import com.ctem.service.UserDetailService;
 
@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Transactional
 	public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
 		// Let people login with either username or email
-		User user = userDetailService.findByUsernameOrEmail(usernameOrEmail);
+		UserEntity user = userDetailService.findByUsernameOrEmail(usernameOrEmail);
 		if(user == null) {
 			throw new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail);
 		}
@@ -38,9 +38,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 	// This method is used by JWTAuthenticationFilter
 	@Transactional
 	public UserDetails loadUserById(Long id) {
-		User user = userRepository.findById(id)
+		UserEntity user = userRepository.findById(id)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
 
 		return (UserDetails) UserPrincipal.create(user);
 	}
+	@Transactional
+	public UserDetails userById(Long id) {
+		UserEntity user = userRepository.getOne(id);
+		return (UserDetails) UserPrincipal.create(user);
+	}
+	
 }

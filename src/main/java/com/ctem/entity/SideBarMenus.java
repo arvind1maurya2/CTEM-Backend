@@ -6,7 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
-
+/**
+ * 
+ * @author Arvind Maurya
+ *
+ */
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "SideBarMenus.findAllParentMenus", query = "SELECT sbm FROM SideBarMenus sbm WHERE sbm.parentMenu = true AND sbm.archived = 'false'"),

@@ -1,6 +1,5 @@
 package com.ctem.entity;
 import java.io.Serializable;
-
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -12,36 +11,43 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
+import org.bonitasoft.engine.api.APIClient;
+import org.bonitasoft.engine.session.APISession;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
-
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 
 	public static ThreadLocal<Long> currentUserId = new ThreadLocal<Long>();
+	public static ThreadLocal<APISession> apiSession = new ThreadLocal<APISession>();
+	public static ThreadLocal<APIClient> apiClient = new ThreadLocal<APIClient>();
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", updatable = false, nullable = false)
+	@Column(name = "persistenceid", updatable = false, nullable = false)
 	private Long id;
-
+	@JsonIgnore
 	@CreatedDate
 	private Calendar creationDate;
+	@JsonIgnore
 	@LastModifiedDate
 	private Calendar updationDate;
-
+	@JsonIgnore
 	private Long createdUserId;
+	@JsonIgnore
 	private Long updatedUserId;
-	@Version
-	private Long version;
+	@JsonIgnore
 	@Column(nullable = false, columnDefinition = "boolean default false")
 	private boolean archived;
 
@@ -103,20 +109,6 @@ public class BaseEntity implements Serializable {
 	 */
 	public void setUpdatedUserId(Long updatedUserId) {
 		this.updatedUserId = updatedUserId;
-	}
-
-	/**
-	 * @return the version
-	 */
-	public Long getVersion() {
-		return version;
-	}
-
-	/**
-	 * @param version the version to set
-	 */
-	public void setVersion(Long version) {
-		this.version = version;
 	}
 
 	@PrePersist

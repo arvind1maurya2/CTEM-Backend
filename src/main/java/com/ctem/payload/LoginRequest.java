@@ -8,20 +8,21 @@ import javax.validation.constraints.NotBlank;
 public class LoginRequest {
 
 	@NotBlank
-	private String userNameOrEmail;
+	private String username;
 	@NotBlank
 	private String password;
+	
 	/**
-	 * @return the userNameOrEmail
+	 * @return the username
 	 */
-	public String getUserNameOrEmail() {
-		return userNameOrEmail;
+	public String getUsername() {
+		return username;
 	}
 	/**
-	 * @param userNameOrEmail the userNameOrEmail to set
+	 * @param username the username to set
 	 */
-	public void setUserNameOrEmail(String userNameOrEmail) {
-		this.userNameOrEmail = userNameOrEmail;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	/**
 	 * @return the password

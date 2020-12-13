@@ -1,65 +1,85 @@
 package com.ctem.endpoint;
-import java.io.IOException;
 
-import javax.validation.Valid;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ctem.constant.StatusMessage;
-import com.ctem.entity.User;
-import com.ctem.payload.JwtAuthenticationResponse;
-import com.ctem.payload.LoginRequest;
-import com.ctem.repository.RoleRepository;
-import com.ctem.repository.UserRepository;
-import com.ctem.security.JWTTokenProvider;
-import com.ctem.service.UserDetailService;
+import com.ctem.entity.District;
+import com.ctem.payload.ApiResponse;
+import com.ctem.repository.CityRepository;
+import com.ctem.repository.DistrictRepository;
+import com.ctem.service.AuthenticationService;
 
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
-
 @RestController
 @CrossOrigin
 @RequestMapping("/api/auth")
-public class AuthController extends StatusMessage {
+public class AuthController {
 
 	@Autowired
-	AuthenticationManager authenticationManager;
-
+	AuthenticationService authenticationService;
 	@Autowired
-	UserRepository userRepository;
-
+	DistrictRepository districtRepository;
 	@Autowired
-	UserDetailService userDetailService;
+	CityRepository cityRepository;
+	@PersistenceContext
+	private EntityManager entityManager;
 
-	@Autowired
-	RoleRepository roleService;
-
-	@Autowired
-	PasswordEncoder passwordEncoder;
-
-	@Autowired
-	JWTTokenProvider tokenProvider;
-
-	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws IOException {
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getUserNameOrEmail(), loginRequest.getPassword()));
-		User user = userDetailService.findByUsernameOrEmail(loginRequest.getUserNameOrEmail());
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		String jwt = tokenProvider.generateToken(authentication);
-		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, user));
+	/**
+	 * @author Arvind Maurya
+	 * @since 2020-12-14
+	 * @param request
+	 * @param response
+	 * @param userId
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@GetMapping("/menus/{userId}")
+	public ResponseEntity<?> getSidebarContent(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable(value = "userId", required = true) Long userId) {
+		if (userId > 0) {
+			return ResponseEntity.ok(authenticationService.getAllPermissionsByUserId(Long.parseLong("1")));
+		} else {
+			return new ResponseEntity(new ApiResponse(false, "userId Can't be blank"), HttpStatus.BAD_REQUEST);
+		}
 	}
+
+	/**
+	 * @author Arvind Maurya
+	 * @since 2020-12-14
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@GetMapping("/get-district-city-list")
+	public ResponseEntity<?> getDistrictCityList(HttpServletRequest request, HttpServletResponse response) {
+		List<District> districts = districtRepository.findAll();
+		if (districts != null) {
+			for (District district : districts) {
+				district.setCities(entityManager.createNamedQuery("City.findDistrictId")
+						.setParameter("districtId", district.getId()).getResultList());
+			}
+		}
+		return new ResponseEntity<>(districts, HttpStatus.OK);
+	}
+	//TenantAdministrationAPI tenantAdministrationAPI = org.bonitasoft.engine.api.TenantAPIAccessor.getTenantAdministrationAPI(BaseEntity.apiSession.get());
+	//File file = new File("D://bdmClient.zip");
+	//FileUtils.writeByteArrayToFile(file,  tenantAdministrationAPI.getClientBDMZip());			
 }

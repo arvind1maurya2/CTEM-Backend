@@ -2,9 +2,9 @@ package com.ctem.config;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
 public class CorsConfig implements WebMvcConfigurer{

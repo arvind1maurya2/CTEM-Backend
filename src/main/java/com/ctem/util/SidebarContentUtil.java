@@ -11,11 +11,11 @@ import com.ctem.entity.RoleAllotedPermission;
 import com.ctem.entity.SideBarMenus;
 
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
 public class SidebarContentUtil {
-	
 	
 	@SuppressWarnings("unchecked")
 	public static List<SideBarMenus> checkChildMenuPermission(List<RoleAllotedPermission> userPermissions, SideBarMenus parentMenu, EntityManager entityManager) {

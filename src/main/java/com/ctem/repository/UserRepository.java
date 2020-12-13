@@ -5,22 +5,22 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import com.ctem.entity.User;
+import com.ctem.entity.UserEntity;
 
 /**
  * @author Shashank
  *
  */
 @Service
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<UserEntity, Long>{
 	
-	Optional<User> findByEmail(String email);
+	Optional<UserEntity> findByEmail(String email);
 
-	User findByUsernameOrEmail(String username, String email);
+	UserEntity findByUsernameOrEmail(String username, String email);
 
-	List<User> findByIdIn(List<Long> userIds);
+	List<UserEntity> findByIdIn(List<Long> userIds);
 
-	Optional<User> findByUsername(String username);
+	Optional<UserEntity> findByUsername(String username);
 
 	Boolean existsByUsername(String username);
 

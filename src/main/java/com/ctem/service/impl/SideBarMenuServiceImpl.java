@@ -12,7 +12,7 @@ import org.springframework.util.CollectionUtils;
 import com.ctem.entity.BaseEntity;
 import com.ctem.entity.RoleAllotedPermission;
 import com.ctem.entity.SideBarMenus;
-import com.ctem.entity.User;
+import com.ctem.entity.UserEntity;
 import com.ctem.service.SideBarMenuService;
 import com.ctem.util.SidebarContentUtil;
 
@@ -38,7 +38,7 @@ public class SideBarMenuServiceImpl implements SideBarMenuService {
 	@SuppressWarnings("unchecked")
 	private List<SideBarMenus> listMenuByRole() {
 		List<SideBarMenus> allotedMenus = new ArrayList<SideBarMenus>();
-		User user = entityManager.find(User.class, BaseEntity.currentUserId.get());
+		UserEntity user = entityManager.find(UserEntity.class, BaseEntity.currentUserId.get());
 		List<RoleAllotedPermission> allPermissions = entityManager
 				.createNamedQuery("RoleAllotedPermission.findAllAllotedPermissionByRole")
 				.setParameter("roleId", user.getRole().getId()).getResultList();
@@ -59,7 +59,7 @@ public class SideBarMenuServiceImpl implements SideBarMenuService {
 
 	@Override
 	public List<SideBarMenus> getSidebarContent() {
-		User user = entityManager.find(User.class, BaseEntity.currentUserId.get());
+		UserEntity user = entityManager.find(UserEntity.class, BaseEntity.currentUserId.get());
 		if (user.getRole().getId() == 1L) {
 			return listAllMenuForAdmin();
 		}

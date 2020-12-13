@@ -20,6 +20,11 @@ import com.ctem.security.CustomUserDetailsService;
 import com.ctem.security.JWTAuthenticationEntryPoint;
 import com.ctem.security.JWTAuthenticationFilter;
 
+/**
+ * 
+ * @author Arvind Maurya
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
@@ -84,9 +89,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/api/auth/**").permitAll()
-				.antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability",
-						"/api/user/forgotPassword", "/api/user/changeUserPassword")
+				.antMatchers("/api/basic/**").permitAll()
+				.antMatchers("/api/user1/checkUsernameAvailability", "/api/user1/checkEmailAvailability",
+						"/api/user1/forgotPassword", "/api/user1/changeUserPassword")
 				.permitAll().antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**").permitAll().anyRequest()
 				.authenticated();
 

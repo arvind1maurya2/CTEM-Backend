@@ -7,11 +7,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
- * @author Shashank
+ * 
+ * @author Arvind Maurya
  *
  */
-
 @Entity 
 @NamedQueries({ 
 	@NamedQuery(name = "Role.getActiveRoles", query = "SELECT r fROM Role r WHERE r.archived='false' AND r.id not in ('1') ORDER BY r.creationDate DESC"),
@@ -29,10 +31,12 @@ public class Role extends BaseEntity {
 
 	@Column(length = 60, unique = true)
 	private String name;
-	
+	@JsonIgnore
 	@Column(nullable = false, columnDefinition = "boolean default false")
 	private boolean systemRole;
+	@JsonIgnore
 	private Long userTypeId;
+	private String Description;
 	
 	/*
 	 * userTypeId 1 = Super Admin
@@ -45,7 +49,7 @@ public class Role extends BaseEntity {
 	 * userTypeId 8 = Store Keeper
 	 * userTypeId 9 = Supplier
 	  */
-	
+	@JsonIgnore
 	@Transient
 	private List<RoleAllotedPermission> roleAllotedPermission;
 
@@ -113,8 +117,18 @@ public class Role extends BaseEntity {
 		this.userTypeId = userTypeId;
 	}
 
-	
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return Description;
+	}
 
-	
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		Description = description;
+	}
 
 }

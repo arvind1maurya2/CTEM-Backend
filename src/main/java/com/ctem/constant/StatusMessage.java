@@ -1,6 +1,9 @@
 package com.ctem.constant;
-
-
+/**
+ * 
+ * @author Arvind Maurya
+ *
+ */
 public class StatusMessage {
 	public static final String CREATED_SUCCESSFULLY_MESSAGE = " created successfully.";
 	public static final String UPDATED_SUCCESSFULLY_MESSAGE = " updated successfully.";
